@@ -29,4 +29,14 @@ describe('lift', function() {
     a(3); c(3);
     assert.equal(sum(), a() + b() + c() + d() + e());
   });
+  it('is backwards compatible with the splat parameters', function() {
+    const x = stream(3);
+    const y = stream(4);
+    const sum = lift((n1, n2) => n1 + n2, x, y);
+    assert.equal(sum(), x() + y());
+    x(12);
+    assert.equal(sum(), x() + y());
+    y(3);
+    assert.equal(sum(), x() + y());
+  })
 });
