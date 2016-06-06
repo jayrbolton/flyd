@@ -8,7 +8,7 @@ describe('lift', function() {
     var add = function(x, y) { return x + y; };
     var x = stream(3);
     var y = stream(4);
-    var sum = lift(add, x, y);
+    var sum = lift(add, [x, y]);
     assert.equal(sum(), x() + y());
     x(12);
     assert.equal(sum(), x() + y());
@@ -22,7 +22,7 @@ describe('lift', function() {
     var c = stream(3);
     var d = stream(4);
     var e = stream(5);
-    var sum = lift(add, a, b, c, d, e);
+    var sum = lift(add, [a, b, c, d, e]);
     assert.equal(sum(), a() + b() + c() + d() + e());
     e(12); d(2); b(0);
     assert.equal(sum(), a() + b() + c() + d() + e());
